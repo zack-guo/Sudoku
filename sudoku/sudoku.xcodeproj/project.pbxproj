@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		922693A923BB17D8007D116C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 922693A823BB17D8007D116C /* main.cpp */; };
+		922693C423C19908007D116C /* sudoku.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 922693C323C19908007D116C /* sudoku.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		922693A523BB17D8007D116C /* sudoku */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sudoku; sourceTree = BUILT_PRODUCTS_DIR; };
 		922693A823BB17D8007D116C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		922693C223BDE1A5007D116C /* sudoku.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sudoku.h; sourceTree = "<group>"; };
+		922693C323C19908007D116C /* sudoku.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sudoku.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				922693A823BB17D8007D116C /* main.cpp */,
+				922693C223BDE1A5007D116C /* sudoku.h */,
+				922693C323C19908007D116C /* sudoku.cpp */,
 			);
 			path = sudoku;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				922693C423C19908007D116C /* sudoku.cpp in Sources */,
 				922693A923BB17D8007D116C /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
