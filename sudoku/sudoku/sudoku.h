@@ -9,22 +9,17 @@
 #ifndef sudoku_h
 #define sudoku_h
 
+#include "changelist.h"
+
 class sudoku
 {
 private:
-    char first_line[9];
-    int move_list[9][9];
+    char first_line[9];//数独y第一行的信息保存
+    //int move_list[9][9];
 public:
-    void generator();
-    void output();
-};
-
-class list
-{
-private:
-    int list[3][3];
-public:
-    void change_list(int *);
+    sudoku(char* firstline);
+    void generator();//生成第一行的数独，并保存在first_line中
+    void output(changelist);//生成数独终局并输出
 };
 
 
