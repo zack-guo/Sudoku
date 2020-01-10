@@ -7,10 +7,15 @@
 //
 
 #include <iostream>
+#include "sudoku.h"
+#include "changelist.h"
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    std::cout << "Hello, World!\n";
+    int n;
+    scanf("%d",&n);
+    sudoku sudoku_(n);
+    sudoku_.generator();
     return 0;
 }
 

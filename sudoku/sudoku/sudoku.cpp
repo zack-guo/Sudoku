@@ -7,26 +7,33 @@
 //
 
 #include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 #include <algorithm>
 #include "sudoku.h"
 #include "changelist.h"
 
 sudoku:: sudoku(int n)
 {
-    int temp_arr[9] = {'0','1','2','3','4','5','6','7','8'};
+    char temp_arr[9] = {'1','2','3','4','5','6','7','8','9'};
     memcpy(first_line,temp_arr,sizeof(temp_arr));
+    num=n;
+    strcpy(file_name,"45.txt");
 }
 
 void sudoku::generator()//生成
 {
     int current_num=0;
     changelist l;
+    if((fp=fopen(file_name, "wb"))==NULL)
+        printf("!!!\n");
     while(1)
     {
         output(l);
         current_num++;
         if(current_num==num)
         {
+            fclose(fp);
             return;
         }
         for(int i=0;i<71;++i)//list 可以有72种变化
@@ -36,12 +43,14 @@ void sudoku::generator()//生成
             current_num++;
             if(current_num==num)
             {
+                fclose(fp);
                 return;
             }
         }
         l.change_list();
-        std::next_permutation(first_line[1],first_line[9]);
+        std::next_permutation(&first_line[1],&first_line[8]);
     }
+    
 }
 
 void sudoku::output(changelist l)
@@ -49,19 +58,22 @@ void sudoku::output(changelist l)
     //生成
     //list 样例 {0,3,6,1,4,7,2,5,8}
     //打开文件
+    
     for(int i=0;i<9;++i)
     {
         for(int j=l.get(i);j<9;++j)
         {
-            
+            fwrite((first_line+j),sizeof(char),1,fp);
             //加入一个字符
         }
         for(int j=0;j<l.get(i);++j)
         {
+            fwrite((first_line+j),sizeof(char),1,fp);
             //加入字符
         }
         //回车
+        fwrite("\r\n",2,1,fp);
     }
-    
+    fwrite("\r\n",2,1,fp);
     //关闭文件
 }

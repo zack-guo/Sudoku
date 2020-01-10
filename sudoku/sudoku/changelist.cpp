@@ -18,15 +18,15 @@ changelist:: changelist()
 
 void changelist:: change_list()//改变变化列表
 {
-    if(std::next_permutation(list[1], list[2]))
+    if(std::next_permutation(&list[1],&list[2]))
     {
         return;
     }
-    if(std::next_permutation(list[3], list[5]))
+    if(std::next_permutation(&list[3], &list[5]))
     {
         return;
     }
-    if(std::next_permutation(list[6], list[8]))
+    if(std::next_permutation(&list[6], &list[8]))
     {
         return;
     }
