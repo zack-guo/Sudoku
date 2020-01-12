@@ -10,6 +10,7 @@
 		922693A923BB17D8007D116C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 922693A823BB17D8007D116C /* main.cpp */; };
 		922693C423C19908007D116C /* sudoku.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 922693C323C19908007D116C /* sudoku.cpp */; };
 		922693C723C1A9BB007D116C /* changelist.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 922693C523C1A9BB007D116C /* changelist.cpp */; };
+		922EC71823C8C0250009605B /* solve.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 922EC71623C8C0250009605B /* solve.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,8 @@
 		922693C323C19908007D116C /* sudoku.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sudoku.cpp; sourceTree = "<group>"; };
 		922693C523C1A9BB007D116C /* changelist.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = changelist.cpp; sourceTree = "<group>"; };
 		922693C823C1A9F5007D116C /* changelist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = changelist.h; sourceTree = "<group>"; };
+		922EC71623C8C0250009605B /* solve.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = solve.cpp; sourceTree = "<group>"; };
+		922EC71923C8C0400009605B /* solve.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = solve.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +71,8 @@
 				922693C323C19908007D116C /* sudoku.cpp */,
 				922693C823C1A9F5007D116C /* changelist.h */,
 				922693C523C1A9BB007D116C /* changelist.cpp */,
+				922EC71923C8C0400009605B /* solve.h */,
+				922EC71623C8C0250009605B /* solve.cpp */,
 			);
 			path = sudoku;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				922EC71823C8C0250009605B /* solve.cpp in Sources */,
 				922693C423C19908007D116C /* sudoku.cpp in Sources */,
 				922693A923BB17D8007D116C /* main.cpp in Sources */,
 				922693C723C1A9BB007D116C /* changelist.cpp in Sources */,
