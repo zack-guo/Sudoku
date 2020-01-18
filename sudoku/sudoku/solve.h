@@ -17,6 +17,7 @@ private:
     int current_box;//当前的宫
     int current_num;//当前搜索的数字
     FILE* fp;
+    FILE* fout;
 public:
     int backtrack(int);
     bool check(int,int);
@@ -24,6 +25,8 @@ public:
     void output();
     void clean();
     int read();
+    void setfile(char*);
+    void closefile();
 };
 
 #endif /* solve_h */

@@ -33,12 +33,7 @@ int solve:: read()
     char linep[30];
     int ir=0;
     int il=0;
-    FILE* fp;
     printf("hello?\n");
-    if((fp=fopen("12345.txt", "r"))==NULL)
-    {
-        printf("!!!");
-    }
     while(fgets(linep, sizeof(linep), fp))
     {
         if(linep[0]=='\n')
@@ -66,6 +61,7 @@ int solve:: read()
     }
     //到达文件末尾
     fclose(fp);
+    fclose(fout);
     return 0;
 }
 
@@ -120,7 +116,7 @@ int solve:: backtrack(int n)
                     map[row][column]=current_num;
                     check_list[current_box][current_num]=false;
                     current_box++;
-                    output();
+                    //output();
                     if(backtrack(n+1))
                         return 1;
                     current_num=map[row][column];
@@ -144,17 +140,24 @@ int solve:: backtrack(int n)
 
 void solve::output()
 {
-    for(int i=0;i<9;i++)
+    if(fout==NULL)
+        fout=fopen("sudoku.txt","w");
+    else
+        fwrite("\r\n",2,1,fp);
+    for(int i=0;i<9;++i)
     {
-        if(i%3==0)
-            printf("----------------------\n");
-        for(int j=0;j<9;j++)
+        for(int j=0;j<9;++j)
         {
-            printf("%d ",map[i][j]);
-            if(j%3==2)
-                printf("|");
+            fwrite(&map[i][j],sizeof(int),1,fout);
+            //加入一个字符
         }
-        printf("\n");
+        //回车
+        fwrite("\r\n",2,1,fout);
     }
-    printf("\n");
+    fwrite("\r\n",2,1,fp);
+}
+
+void solve:: setfile(char path[])
+{
+    fp=fopen(path, "r");
 }
