@@ -12,20 +12,18 @@
 class solve
 {
 private:
-    char map[9][9];         //数独盘
-    bool check_list[9][9];  //每个宫数字的出现情况
-    int current_map;//当前的宫
+    int map[9][9];         //数独盘
+    bool check_list[9][10];  //每个宫数字的出现情况
+    int current_box;//当前的宫
     int current_num;//当前搜索的数字
-    int target_num; //
     FILE* fp;
 public:
-    void backtrack(int);
-    bool check();
-    bool bound();
-    solve(FILE*);
+    int backtrack(int);
+    bool check(int,int);
+    solve();
     void output();
     void clean();
-    void read();
+    int read();
 };
 
 #endif /* solve_h */

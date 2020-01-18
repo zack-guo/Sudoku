@@ -12,54 +12,149 @@
 #include "solve.h"
 
 
-solve:: solve(FILE* f)
+solve:: solve()
 {
-    current_map=0;
-    current_num=0;
-    fp=f;
+    current_box=0;
+    current_num=1;
+    memset(map,0,sizeof(map));     //数独盘
+    memset(check_list, 1, sizeof(check_list));
 }
 
 void solve::clean()
 {
-    current_map=0;
-    current_num=0;
-    target_num=0;
+    current_box=0;
+    current_num=1;
     memset(map,0,sizeof(map));     //数独盘
-    memset(check_list, 0, sizeof(check_list));
+    memset(check_list, 1, sizeof(check_list));
 }
 
-void solve:: read()
+int solve:: read()
 {
-    char linep[20];
-    int i=0;
+    char linep[30];
+    int ir=0;
+    int il=0;
+    FILE* fp;
+    printf("hello?\n");
+    if((fp=fopen("12345.txt", "r"))==NULL)
+    {
+        printf("!!!");
+    }
     while(fgets(linep, sizeof(linep), fp))
     {
-        if(*linep=='\n')
+        if(linep[0]=='\n')
         {
-            i=0;
+            ir=0;
+            il=0;
             clean();
         }
         else
         {
-            for(int j=0;j<9;j++)
+            il=0;
+            for(int j=0;j<strlen(linep);j++)
             {
-                map[i][j]=linep[j];
-                check_list[(i/3)*3+(j/3)][linep[j]-'0']=true;
+                if(linep[j]<='9'&&linep[j]>='0')
+                {
+                    map[ir][il]=linep[j]-'0';
+                    check_list[(ir/3)*3+(il/3)][linep[j]-'0']=false;
+                    il++;
+                }
             }
-            i++;
+            ir++;
+            if(ir==9)
+                return 1;
         }
     }
+    //到达文件末尾
+    fclose(fp);
+    return 0;
 }
 
-void solve:: backtrack(int n)
+bool solve:: check(int r,int c)
 {
-    if(n>target_num)
+    for(int i=0;i<9;i++)
+    {
+        if(i!=c)
+        {
+            if(map[r][i]==current_num)
+                return false;
+        }
+        if(i!=r)
+        {
+            if(map[i][c]==current_num)
+                return false;
+        }
+    }
+    return true;
+}
+
+int solve:: backtrack(int n)
+{
+    if(current_box==9&&current_num==9&&n>36)
     {
         output();
-        exit(1);
+        return 1;
     }
-    
-    
-        
+    //如果当前还没有填完
+    while(1)
+    {
+        //正常循环
+        if(current_box==9)
+        {
+            current_box=0;
+            current_num++;
+            if(current_num>=10)
+                return 0;
+        }
+        //当前的宫可以填数字
+        if(check_list[current_box][current_num])
+        {
+            //对当前的宫进行循环
+            for(int i=0;i<9;i++)
+            {
+                //if(current_box>9)
+                //    printf("shit");
+                int row=(current_box/3)*3+i/3;
+                int column=(current_box%3)*3+i%3;
+                if(map[row][column]==0&&check(row,column)&&check_list[current_box][current_num])
+                {
+                    map[row][column]=current_num;
+                    check_list[current_box][current_num]=false;
+                    current_box++;
+                    output();
+                    if(backtrack(n+1))
+                        return 1;
+                    current_num=map[row][column];
+                    map[row][column]=0;
+                    current_box=(row/3)*3+(column/3);
+                    check_list[current_box][current_num]=true;
+                    
+                }
+            }
+            return 0;
+        }
+        else
+        {
+            current_box++;
+            continue;
+        }
+
+    }
+    return 0;
 }
 
+void solve::output()
+{
+    for(int i=0;i<9;i++)
+    {
+        if(i%3==0)
+            printf("----------------------\n");
+        for(int j=0;j<9;j++)
+        {
+            printf("%d ",map[i][j]);
+            if(j%3==2)
+                printf("|");
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
