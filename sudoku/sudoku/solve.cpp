@@ -16,6 +16,8 @@ solve::solve()
 {
 	current_box = 0;
 	current_num = 1;
+	target_num = 0;
+	flag = 0;
 	memset(map, 0, sizeof(map));     //数独盘
 	memset(check_list, 1, sizeof(check_list));
 }
@@ -24,6 +26,7 @@ void solve::clean()
 {
 	current_box = 0;
 	current_num = 1;
+	target_num = 0;
 	memset(map, 0, sizeof(map));     //数独盘
 	memset(check_list, 1, sizeof(check_list));
 }
@@ -33,7 +36,6 @@ int solve::read()
 	char linep[30];
 	int ir = 0;
 	int il = 0;
-	printf("hello?\n");
 	if (fp == NULL)
 		printf("shit");
 	while (fgets(linep, sizeof(linep), fp))
@@ -54,11 +56,21 @@ int solve::read()
 					map[ir][il] = linep[j] - '0';
 					check_list[(ir / 3) * 3 + (il / 3)][linep[j] - '0'] = false;
 					il++;
+					if (linep[j] == '0')
+						target_num++;
 				}
 			}
 			ir++;
 			if (ir == 9)
+			{
+				if (flag != 0)
+				{
+					fwrite("\r\n", 2, 1, fout);
+				}
+				flag = 1;
 				return 1;
+			}
+				
 		}
 	}
 	//到达文件末尾
@@ -88,7 +100,7 @@ bool solve::check(int r, int c)
 
 int solve::backtrack(int n)
 {
-	if (current_box == 9 && current_num == 9 && n > 36)
+	if ((current_box == 9 && current_num == 9)||n>=target_num )
 	{
 		output();
 		return 1;
@@ -136,7 +148,6 @@ int solve::backtrack(int n)
 			current_box++;
 			continue;
 		}
-
 	}
 	return 0;
 }
@@ -144,24 +155,29 @@ int solve::backtrack(int n)
 void solve::output()
 {
 	if (fout == NULL)
-		fout = fopen("sudoku.txt", "w");
-	else
-		fwrite("\r\n", 2, 1, fp);
+		fout = fopen("sudoku.txt", "wb");
 	for (int i = 0; i < 9; ++i)
 	{
 		for (int j = 0; j < 9; ++j)
 		{
-			char a = '0' + map[i][j];
-			fwrite(&a, sizeof(int), 1, fout);
+			
+			char a[1];
+			a[0]= '0' + map[i][j];
+			fwrite(&a, sizeof(char), 1, fout);
 			//加入一个字符
+			if(j<8)
+				fwrite(" ", sizeof(char), 1, fout);
 		}
 		//回车
 		fwrite("\r\n", 2, 1, fout);
 	}
-	fwrite("\r\n", 2, 1, fp);
 }
 
 void solve::set_file(const char* path)
 {
 	fp = fopen(path, "r");
+	printf(path);
+	char filename[50];
+	strcpy(filename, "./sudoku.txt");
+	fout = fopen(filename, "wb");
 }

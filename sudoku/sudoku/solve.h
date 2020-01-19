@@ -16,6 +16,8 @@ private:
 	bool check_list[9][10];  //每个宫数字的出现情况
 	int current_box;//当前的宫
 	int current_num;//当前搜索的数字
+	int target_num;//空缺数量
+	int flag;
 	FILE* fp;
 	FILE* fout;
 public:
