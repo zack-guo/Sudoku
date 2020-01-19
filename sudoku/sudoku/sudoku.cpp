@@ -10,6 +10,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <algorithm>
+#include <string>
+#include <fstream>
+#include <sstream>
 #include "sudoku.h"
 #include "changelist.h"
 
@@ -18,8 +21,8 @@ sudoku::sudoku(int n)
 	char temp_arr[9] = { '1','2','3','4','5','6','7','8','9' };
 	memcpy(first_line, temp_arr, sizeof(temp_arr));
 	num = n;
-	strcpy(file_name, "sudoku_generate.txt");
-	fp = fopen(file_name, "wb");
+	//strcpy(file_name, "sudoku_generate.txt");
+	//fp = fopen(file_name, "wb");
 }
 
 void sudoku::generator()//生成
@@ -42,7 +45,8 @@ void sudoku::generator()//生成
 		}
 		else
 		{
-			fwrite("\n", 1, 1, fp);
+			//fwrite("\n", 1, 1, fp);
+			superc += "\n";
 		}
 		for (int i = 0; i < 71; ++i)//list 可以有72种变化
 		{
@@ -56,7 +60,9 @@ void sudoku::generator()//生成
 			}
 			else
 			{
-				fwrite("\n", 1, 1, fp);
+				//fwrite("\n", 1, 1, fp);
+				//strcat(superchar, "\n");
+				superc += "\n";
 			}
 		}
 		l.change_list();
@@ -75,18 +81,44 @@ void sudoku::output(changelist l)
 		for (int j = l.get(i); j < 9; ++j)
 		{
 			if (j != l.get(i))
-				fwrite(" ", sizeof(char), 1, fp);
-			fwrite((first_line + j), sizeof(char), 1, fp);
+			{
+				//fwrite(" ", sizeof(char), 1, fp);
+				//strcat(superchar, " ");
+				superc += " ";
+			}
+				
+			//fwrite((first_line + j), sizeof(char), 1, fp);
+			//strcat(superchar, (first_line + j));
+			superc += first_line[j];
 			//加入一个字符
 		}
 		for (int j = 0; j < l.get(i); ++j)
 		{
-			fwrite(" ", sizeof(char), 1, fp);
-			fwrite((first_line + j), sizeof(char), 1, fp);
+			//fwrite(" ", sizeof(char), 1, fp);
+			//strcat(superchar, " ");
+			superc += " ";
+			//fwrite((first_line + j), sizeof(char), 1, fp);
+			//strcat(superchar, (first_line + j));
+			superc += first_line[j];
 			//加入字符
 		}
 		//回车
-		fwrite("\r\n", 2, 1, fp);
+		//fwrite("\r\n", 2, 1, fp);
+		//strcat(superchar, "\n");
+		superc += "\n";
+
 	}
 	//关闭文件
+}
+
+void sudoku::superoutput()
+{
+	ofstream fs;
+	strcpy(file_name, "sudoku_generate.txt");
+	fs.open(file_name);
+	fs << superc;
+	fs.close();
+	//fwrite(superchar, sizeof(superchar), strlen(superchar), fp);
+	//fclose(fp);
+
 }

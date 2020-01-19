@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <algorithm>
+#include <string>
 #include "solve.h"
 
 
@@ -20,6 +21,7 @@ solve::solve()
 	flag = 0;
 	memset(map, 0, sizeof(map));     //数独盘
 	memset(check_list, 1, sizeof(check_list));
+	memset(superchar, 0, sizeof(char));
 }
 
 void solve::clean()

@@ -10,6 +10,9 @@
 #define sudoku_h
 
 #include "changelist.h"
+#include <string>
+
+using namespace std;
 
 class sudoku
 {
@@ -18,11 +21,13 @@ private:
     int num;           //生成数量
     char file_name[50];
     FILE* fp;
+	string superc;
     //int move_list[9][9];
 public:
     sudoku(int n);
     void generator();//生成第一行的数独，并保存在first_line中
     void output(changelist);//生成数独终局并输出
+	void superoutput();
 };
 
 
