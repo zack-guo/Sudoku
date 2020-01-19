@@ -41,7 +41,10 @@ int solve::read()
 	int ir = 0;
 	int il = 0;
 	if (fp == NULL)
-		printf("shit");
+	{
+		printf("路径无效!");
+		exit(1);
+	}
 	while (fgets(linep, sizeof(linep), fp))
 	{
 		if (linep[0] == '\n')
@@ -187,7 +190,7 @@ void solve::set_file(const char* path)
 	fp = fopen(path, "r");
 	printf(path);
 	char filename[50];
-	strcpy(filename, "./sudoku.txt");
+	strcpy(filename, "sudoku.txt");
 	//fout = fopen(filename, "wb");
 }
 
