@@ -9,9 +9,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <algorithm>
+#include <fstream>
+#include <sstream>
 #include <string>
 #include "solve.h"
 
+using namespace std;
 
 solve::solve()
 {
@@ -21,7 +24,6 @@ solve::solve()
 	flag = 0;
 	memset(map, 0, sizeof(map));     //数独盘
 	memset(check_list, 1, sizeof(check_list));
-	memset(superchar, 0, sizeof(char));
 }
 
 void solve::clean()
@@ -67,7 +69,8 @@ int solve::read()
 			{
 				if (flag != 0)
 				{
-					fwrite("\r\n", 2, 1, fout);
+					//fwrite("\r\n", 2, 1, fout);
+					superc += "\n";
 				}
 				flag = 1;
 				return 1;
@@ -77,7 +80,7 @@ int solve::read()
 	}
 	//到达文件末尾
 	fclose(fp);
-	fclose(fout);
+	//fclose(fout);
 	return 0;
 }
 
@@ -156,8 +159,8 @@ int solve::backtrack(int n)
 
 void solve::output()
 {
-	if (fout == NULL)
-		fout = fopen("sudoku.txt", "wb");
+	//if (fout == NULL)
+	//	fout = fopen("sudoku.txt", "wb");
 	for (int i = 0; i < 9; ++i)
 	{
 		for (int j = 0; j < 9; ++j)
@@ -165,13 +168,17 @@ void solve::output()
 			
 			char a[1];
 			a[0]= '0' + map[i][j];
-			fwrite(&a, sizeof(char), 1, fout);
+			//fwrite(&a, sizeof(char), 1, fout);
+			superc += a[0];
 			//加入一个字符
-			if(j<8)
-				fwrite(" ", sizeof(char), 1, fout);
+			if (j < 8) {
+				//fwrite(" ", sizeof(char), 1, fout);
+				superc += " ";
+			}
 		}
 		//回车
-		fwrite("\r\n", 2, 1, fout);
+		//fwrite("\r\n", 2, 1, fout)
+			superc += "\n";
 	}
 }
 
@@ -181,5 +188,16 @@ void solve::set_file(const char* path)
 	printf(path);
 	char filename[50];
 	strcpy(filename, "./sudoku.txt");
-	fout = fopen(filename, "wb");
+	//fout = fopen(filename, "wb");
+}
+
+void solve::superoutput()
+{
+	ofstream fs;
+	fs.open("sudoku.txt");
+	fs << superc;
+	fs.close();
+	//fwrite(superchar, sizeof(superchar), strlen(superchar), fp);
+	//fclose(fp);
+
 }

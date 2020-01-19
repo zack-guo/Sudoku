@@ -10,12 +10,11 @@
 #define solve_h
 
 
-
+using namespace std;
 
 class solve
 {
 private:
-	char superchar[10000000000000];
 	int map[9][9];         //数独盘
 	bool check_list[9][10];  //每个宫数字的出现情况
 	int current_box;//当前的宫
@@ -24,6 +23,7 @@ private:
 	int flag;
 	FILE* fp;
 	FILE* fout;
+	string superc;
 public:
 	int backtrack(int);
 	bool check(int, int);
@@ -32,6 +32,7 @@ public:
 	void clean();
 	int read();
 	void set_file(const char*);
+	void superoutput();
 };
 
 #endif /* solve_h */

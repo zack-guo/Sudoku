@@ -16,23 +16,22 @@ int main(int argc, const char * argv[]) {
 	//对命令行参数的处理
 	char c[5];
 	strcpy(c, "-c");
-	//if(!strcmp(argv[1], "-c"))//生成数独
+	if(!strcmp(argv[1], "-c"))//生成数独
 	{
-		//int n = atoi(argv[2]);
-		int n = 1000000;
-		sudoku sudoku_(n);
+		int n = atoi(argv[2]);
+	    sudoku sudoku_(n);
 		sudoku_.generator();
 		sudoku_.superoutput();
 		printf("生成数独终局完成！\n");
 	}
-	//else if (!strcmp(argv[1], "-s"))//求解数独
-	//{
-	//	solve s;
-	//	s.set_file("E:\\sudokuproblem\\problem_easy.txt");
-	//	while (s.read())
-	//		s.backtrack(0);
-	//	printf("解数独完成！\n");
-	//}
+	else if (!strcmp(argv[1], "-s"))//求解数独
+	{
+		solve s;
+		s.set_file("argv[2]");
+		while (s.read())
+			s.backtrack(0);
+		cout<<"解数独完成！"<<endl;
+	}
     return 0;
 }
 

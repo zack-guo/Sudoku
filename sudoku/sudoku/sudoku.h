@@ -19,8 +19,6 @@ class sudoku
 private:
     char first_line[9];//数独y第一行的信息保存
     int num;           //生成数量
-    char file_name[50];
-    FILE* fp;
 	string superc;
     //int move_list[9][9];
 public:

@@ -29,18 +29,17 @@ void sudoku::generator()//生成
 {
 	int current_num = 0;
 	changelist l;
-	if (fp == NULL)
-	{
+	//if (fp == NULL)
+	/*{
 		printf("!!!\n");
 		return;
-	}
+	}*/
 	while (1)
 	{
 		output(l);
 		current_num++;
 		if (current_num == num)
 		{
-			fclose(fp);
 			return;
 		}
 		else
@@ -55,7 +54,6 @@ void sudoku::generator()//生成
 			current_num++;
 			if (current_num == num)
 			{
-				fclose(fp);
 				return;
 			}
 			else
@@ -114,8 +112,7 @@ void sudoku::output(changelist l)
 void sudoku::superoutput()
 {
 	ofstream fs;
-	strcpy(file_name, "sudoku_generate.txt");
-	fs.open(file_name);
+	fs.open("sudoku.txt");
 	fs << superc;
 	fs.close();
 	//fwrite(superchar, sizeof(superchar), strlen(superchar), fp);
